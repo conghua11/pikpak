@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
   <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -104,7 +104,6 @@
                 margin-top: 20px;
                 font-size: 14px;
                 color: brown;
-                opacity: 0.5;
             }
         </style>
     </head>
@@ -114,48 +113,24 @@
             <span>Pikpak自动邀请</span>
         </div>
         <div class="input-group">
-            <form id="inviteForm" onsubmit="handleSubmit(event)">
+            <form id="inviteForm">
+                <p id="te" style="color: blue; font-size: 16px;">输入邀请码点击运行</p>
                 <label for="invite_code">邀请码:</label>
                 <input type="text" id="invite_code" name="invite_code" placeholder="在此处输入邀请码">
-                <input type="submit" class="btn" value="开始运行">
+                <input type="submit" class="btn" value="开始运行" style="width: auto;">
             </form>
         </div>
 
-        <div class="announce" id="result-section" style="display: none;">
+        <div class="announce">
             <h3>结果：</h3>
-            <p id="result"></p>
+            <p id="result">${accountInfo}</p>
+            <p id="result">${time}</p>
         </div>
 
         <div class="credits">
-            <p>源代码作者@B:站纸鸢花的花语</p>
+          <p>小白改版,源代码作者@B:站纸鸢花的花语</p>
+          <a href="https://teacat.cloud/#/register?code=EWEDzeJA" style="color: blue; font-size: 16px;">需要机场请点击</a>
         </div>
     </div>
-
-    <script>
-    function handleSubmit(event) {
-        event.preventDefault();
-        const inviteCode = document.getElementById('invite_code').value;
-        const resultSection = document.getElementById('result-section');
-        const resultElement = document.getElementById('result');
-
-        fetch('/submit_code', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ invite_code: inviteCode }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            resultSection.style.display = 'block';
-            resultElement.textContent = data.message;
-        })
-        .catch((error) => {
-            resultSection.style.display = 'block';
-            resultElement.textContent = '请求失败';
-            console.error('Error:', error);
-        });
-    }
-    </script>
     </body>
     </html>
