@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pikpak自动邀请</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-image: url("https://pic.imgdb.cn/item/65bba67f871b83018a59c948.jpg");
+                background-size: cover;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            #content {
+                background-color: rgba(255, 255, 255, 0.4);
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+                max-width: 400px; /* Decreased max-width */
+                text-align: center;
+            }
+
+            #title {
+                font-size: 24px;
+                color: brown;
+                margin-bottom: 20px;
+            }
+
+            .announce {
+                background-color: #f9f9f9;
+                border: 1px solid #ccc;
+                padding: 20px;
+                margin-bottom: 20px;
+                text-align: left;
+                border-radius: 5px;
+            }
+
+            .announce h3 {
+                margin-bottom: 10px;
+                color: brown;
+            }
+
+            .announce p {
+                margin-bottom: 5px;
+                color: #333;
+                font-size: 16px;
+            }
+
+            .input-group {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            .input-group label {
+                text-align: left;
+                margin-bottom: 5px;
+                font-weight: bold;
+                color: brown;
+            }
+          
+
+            .input-group input {
+                width: calc(50%);
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 2px solid rgba(204, 204, 204, 0.03);
+                border-radius: 5px;
+                font-size: 16px;
+                transition: border-color 0.3s;
+                box-sizing: border-box;
+            }
+
+            .input-group input:focus {
+                outline: none;
+                border-color: #007bff;
+            }
+
+            .btn {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                padding: 12px 10px; /* 调整按钮宽度 */
+                font-size: 16px;
+                border-radius: 15px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                width: auto;
+            }
+
+            .btn:hover {
+                background-color: #0056b3;
+            }
+
+            .credits {
+                margin-top: 20px;
+                font-size: 14px;
+                color: brown;
+                opacity: 0.5;
+            }
+        </style>
+    </head>
+    <body>
+    <div id="content">
+        <div id="title">
+            <span>Pikpak自动邀请</span>
+        </div>
+        <div class="input-group">
+            <form id="inviteForm" onsubmit="handleSubmit(event)">
+                <label for="invite_code">邀请码:</label>
+                <input type="text" id="invite_code" name="invite_code" placeholder="在此处输入邀请码">
+                <input type="submit" class="btn" value="开始运行">
+            </form>
+        </div>
+
+        <div class="announce" id="result-section" style="display: none;">
+            <h3>结果：</h3>
+            <p id="result"></p>
+        </div>
+
+        <div class="credits">
+            <p>源代码作者@B:站纸鸢花的花语</p>
+        </div>
+    </div>
+
+    <script>
+    function handleSubmit(event) {
+        event.preventDefault();
+        const inviteCode = document.getElementById('invite_code').value;
+        const resultSection = document.getElementById('result-section');
+        const resultElement = document.getElementById('result');
+
+        fetch('/submit_code', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ invite_code: inviteCode }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            resultSection.style.display = 'block';
+            resultElement.textContent = data.message;
+        })
+        .catch((error) => {
+            resultSection.style.display = 'block';
+            resultElement.textContent = '请求失败';
+            console.error('Error:', error);
+        });
+    }
+    </script>
+    </body>
+    </html>
