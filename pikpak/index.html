@@ -126,11 +126,21 @@
             <p id="result">${accountInfo}</p>
             <p id="result">${time}</p>
         </div>
-
+       
         <div class="credits">
           <p>小白改版,源代码作者@B:站纸鸢花的花语</p>
           <a href="https://teacat.cloud/#/register?code=EWEDzeJA" style="color: blue; font-size: 16px;">需要机场请点击</a>
         </div>
     </div>
+    <script src="app.js"></script>
+     <script>
+    document.getElementById("inviteForm").addEventListener("submit", async function(event) {
+    event.preventDefault(); // 阻止表单默认提交行为
+    let inviteCode = document.getElementById("invite_code").value; // 获取邀请码
+    let result = await start(inviteCode); // 调用 start 函数并传递邀请码作为参数
+    // 更新页面中的结果
+    document.getElementById("accountInfo").innerText = result.accountInfo;
+    document.getElementById("time").innerText = result.time;
+    });
     </body>
     </html>
