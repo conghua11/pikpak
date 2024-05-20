@@ -142,21 +142,16 @@
         alert("请输入邀请码");
         return;
     }
-    let url = 'https://111.chmg1100.workers.dev/?inCode=' + inviteCode
+    let url = 
     console.log(url)
     try {
         submitBtn.value = "正在运行";
-        let response = await fetch(url, {
+        let response = await fetch('https://111.chmg1100.workers.dev/?inCode=' + inviteCode, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
+        };
         if (!response.ok) {
             throw new Error('网络请求失败');
         }
-
         let result = await response.json(); // 解析 JSON 响应
         // 更新页面中的结果
         document.getElementById("accountInfo").innerText = result.data;
