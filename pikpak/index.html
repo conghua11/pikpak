@@ -123,8 +123,8 @@
 
         <div class="announce">
             <h3>结果：</h3>
-            <p id="result">${accountInfo}</p>
-            <p id="result">${time}</p>
+            <p id="accountInfo"></p>
+            <p id="time"></p>
         </div>
        
         <div class="credits">
@@ -132,16 +132,38 @@
           <a href="https://teacat.cloud/#/register?code=EWEDzeJA" style="color: blue; font-size: 16px;">需要机场请点击</a>
         </div>
     </div>
-    <script src="app.js"></script>
      <script>
     document.getElementById("inviteForm").addEventListener("submit", async function(event) {
     event.preventDefault(); // 阻止表单默认提交行为
     let inviteCode = document.getElementById("invite_code").value; // 获取邀请码
-    let result = await start(inviteCode); // 调用 start 函数并传递邀请码作为参数
-    // 更新页面中的结果
-    document.getElementById("accountInfo").innerText = result.accountInfo;
-    document.getElementById("time").innerText = result.time;
-    });
+
+     // 检查邀请码是否为空
+    if (!inviteCode) {
+        alert("请输入邀请码");
+        return;
+    }
+    
+    try {
+        submitBtn.value = "正在运行";
+        let response = await fetch("https://111.chmg1100.workers.dev/?inCode=" + invite_code, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('网络请求失败');
+        }
+
+        let result = await response.json(); // 解析 JSON 响应
+        // 更新页面中的结果
+        document.getElementById("accountInfo").innerText = result.data;
+        document.getElementById("time").innerText = result.time;
+    } catch (error) {
+        console.error('出现错误:', error);
+    }
+});
     </script>
     </body>
     </html>
