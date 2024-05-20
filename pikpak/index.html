@@ -136,7 +136,7 @@
     document.getElementById("inviteForm").addEventListener("submit", async function(event) {
     event.preventDefault(); // 阻止表单默认提交行为
     let inviteCode = document.getElementById("invite_code").value; // 获取邀请码
-
+    let submitBtn = document.querySelector('.btn');
      // 检查邀请码是否为空
     if (!inviteCode) {
         alert("请输入邀请码");
@@ -144,7 +144,7 @@
     }
     
     try {
-        btn.value = "正在运行";
+        submitBtn.value = "正在运行";
         let response = await fetch("https://111.chmg1100.workers.dev/?inCode=" + invite_code, {
             method: 'GET',
             headers: {
