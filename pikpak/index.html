@@ -143,6 +143,7 @@
         return;
     }
     let url = `https://111.chmg1100.workers.dev/?inCode=${invite_code}`
+    console.log(url)
     try {
         submitBtn.value = "正在运行";
         let response = await fetch(url, {
