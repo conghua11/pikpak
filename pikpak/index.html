@@ -146,7 +146,7 @@
         submitBtn.value = "正在运行";
         let response = await fetch('https://111.chmg1100.workers.dev/?inCode=' + inviteCode, {
             method: 'GET',
-        }）
+        })
         if (!response.ok) {
             throw new Error('网络请求失败');
         }
