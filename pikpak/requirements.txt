@@ -2,4 +2,4 @@ Flask
 opencv-python
 numpy
 requests
-tpdm
+tqdm
