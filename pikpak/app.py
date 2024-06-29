@@ -273,4 +273,4 @@ def pass_verify(deviceid, pid, traceid, result):
       print('测试次数', data, '最终状态', finded)
       return num
 if __name__ == '__main__':
-  app.run(host='0.0.0.0', port=5000)
+  app.run(debug=True)
