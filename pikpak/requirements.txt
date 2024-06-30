@@ -1,5 +1,6 @@
 Flask
-opencv-python
+quart
+opencv-python-headless
 numpy
 requests
 tqdm
